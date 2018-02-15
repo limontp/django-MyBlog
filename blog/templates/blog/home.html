@@ -1,0 +1,47 @@
+{% extends "abstract.html" %}
+{% load static %}
+{% load markdown_deux_tags %}
+
+{% block titlebar %}
+    Home - {{ block.super }}
+{% endblock %}
+
+{% block post_content %}
+    {% for p in posts.object_list %}
+        <div class="blog-post">
+            <h2 class="blog-post-title"> <a href="{% url 'blog:detail' p.id %}">{{ p.title }}</a></h2>
+            <p class="blog-post-meta"><span class="glyphicon glyphicon-calendar" aria-hidden="true" style="color: #555;"></span>
+                {{ p.timestamp.date }} {% if p.series %} <span style="color: #555;">@</span>
+                <a href="{% url 'blog:series' p.series.url %}"> {{ p.series }} </a>{% endif %}
+                <i class="fa fa-eye" aria-hidden="true" style="color: #555; padding-left: 5px;"></i> {{ p.views }} views
+                <i class="fa fa-comments-o" aria-hidden="true" style="color: #555; padding: 0 5px 0 5px;"></i><fb:comments-count href="http://{{ request.get_host }}{% url 'blog:detail' p.id %}"></fb:comments-count> comments</p>
+            {{ p.content|markdown|truncatechars_html:"500" }}
+            <p><a class="bttn" href="{% url 'blog:detail' p.id %}">Read</a></p>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block pagination %}
+    <li> Page {{ posts.number }} of {{ posts.paginator.num_pages }} pages</li>
+    {% if posts.has_next %}
+        <li><a href="{% url 'blog:home' %}?page={{ posts.next_page_number }}">Older posts</a></li>
+    {% endif %}
+    {% if posts.has_previous %}
+        <li><a href="{% url 'blog:home' %}?page={{ posts.previous_page_number }}">Newer posts</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block sidebar_left %}
+    <h4>All tutorial series</h4>
+    <ul class="list-unstyled">
+        {% for s in series %}
+            <li class="sidebar-title"><a href="{% url 'blog:series' s.url %}">{{ s.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <h4>Most popular posts</h4>
+    <ul class="list-unstyled">
+        {% for p in popular %}
+            <li class="sidebar-title"><a href="{% url 'blog:detail' p.id %}">{{ p.title|truncatechars:"60" }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,66 @@
+a {
+    color: #555;
+}
+
+a:hover {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+
+.bttn {
+    margin: 0px;
+    padding: 10px 20px 10px 20px;
+    border-radius: 4px;
+    background-color: #F0563D;
+    color: #fff;
+}
+.bttn:hover {
+    background-color: #7e7e7e;
+    color: #fff;
+}
+
+.blog-post-meta a{
+    color: inherit;
+}
+
+.thr {
+    border: #F0563D solid 1px;
+}
+
+.mBrand {
+    font-size: 30px;
+}
+
+.mnavbar {
+    font-size: 18px;
+    padding: 12px 0;
+    background-color: #363636;
+}
+
+.sidebar-title {
+    padding: 5px 0 5px 5px;
+    margin: 2px 0 2px 0;
+    background-color: #ffffff;
+}
+
+.sidebar-title a:hover {
+    color: red;
+}
+
+.my-post-list {
+    color: #F0563D;
+}
+
+.my-post-list li a {
+    color: #F0563D;
+}
+
+.my-post-list li a:hover {
+    text-decoration: underline;
+}
+
+.search-form {
+    padding: 20px 5px 20px 5px;
+}
